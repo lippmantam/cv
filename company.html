@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Power Inc.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #1a1a2e;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav ul a:hover {
+            color: #4f46e5;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-content {
+            max-width: 760px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2.5rem;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #4f46e5;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.7);
+        }
+
+        /* SERVICES */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #4f46e5;
+            margin-bottom: 0.75rem;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e8e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 12px 32px rgba(79,70,229,0.1);
+            transform: translateY(-4px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* STATS */
+        .stats-section {
+            background: #f5f3ff;
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #4f46e5;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 0.35rem;
+        }
+
+        /* ABOUT */
+        .about-section {
+            background: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 700px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        .about-text h2 {
+            text-align: left;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .about-visual {
+            background: linear-gradient(135deg, #4f46e5, #a855f7);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .about-visual .big-emoji {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .about-visual h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-visual p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a2e, #4f46e5);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1a1a2e;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="logo">Brain<span>Power</span></a>
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="contacts.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Est. 1989 &mdash; Powering Ideas</div>
+            <h1>Unlock Your<br>Full Brain Power</h1>
+            <p>Brain Power Inc. delivers cutting-edge fullstack solutions that turn complex problems into elegant, scalable software.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="contacts.html" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+        <div class="section-inner">
+            <div class="section-label">What We Do</div>
+            <h2>Services</h2>
+            <p class="section-subtitle">From architecture to deployment, we cover the full spectrum of software development.</p>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Fullstack Development</h3>
+                    <p>End-to-end web applications built with modern frameworks. We handle the front, the back, and everything in between.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Performance Optimization</h3>
+                    <p>We audit and supercharge existing systems — faster load times, leaner code, and happier users.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔐</div>
+                    <h3>Security &amp; Architecture</h3>
+                    <p>Rock-solid system design with security baked in from day one, not bolted on afterward.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Technical Consulting</h3>
+                    <p>Expert guidance for teams navigating tech stack decisions, scaling challenges, and complex migrations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">35+</div>
+                <div class="stat-label">Years in Business</div>
+            </div>
+            <div>
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div>
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div>
+                <div class="stat-number">5★</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="section about-section" id="about">
+        <div class="section-inner">
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="section-label">About Us</div>
+                    <h2>Brain Power Inc.</h2>
+                    <p>Founded in 1989, Brain Power Inc. has spent over three decades helping businesses harness the power of technology. We believe great software starts with clear thinking — and we bring that philosophy to every project we touch.</p>
+                    <p>Our team combines deep expertise in C, Python, JavaScript, and systems programming with a relentless focus on quality and craftsmanship.</p>
+                    <a href="contacts.html" class="btn btn-primary" style="display:inline-block; background:#4f46e5; color:#fff; margin-top:1rem;">Meet the Team &rarr;</a>
+                </div>
+                <div class="about-visual">
+                    <div class="big-emoji">🐧</div>
+                    <h3>The Penguin</h3>
+                    <p>Founder &amp; CEO &mdash; fullstack developer, open-source advocate, and proud MacBook Pro user.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to power up?</h2>
+        <p>Let's build something great together. Reach out and we'll get back to you within 24 hours.</p>
+        <a href="contacts.html" class="btn btn-primary">Contact Us Today</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Brain Power Inc. &mdash; <a href="index.html">Personal Site</a></p>
+    </footer>
+
+</body>
+</html>
